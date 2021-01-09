@@ -80,7 +80,13 @@ func main() {
 	check(bytesErr)
 	offset, scanErr := scanFile(packedData, patternBytes)
 	check(scanErr)
-	fmt.Printf("✓ Found pattern to calculate offset from\n")
+
+	if offset != -1 {
+		fmt.Printf("✓ Found pattern to calculate offset from\n")
+	} else {
+		fmt.Printf("\n✗ Could not find pattern needed for offset calculation.\n\n")
+		os.Exit(1)
+	}
 
 	// slice out AES key and IV
 	extractedKey := packedData[offset+16 : offset+48]
