@@ -70,7 +70,7 @@ func main() {
 	check(scanErr)
 
 	if indicatorOffset == -1 {
-		fmt.Printf("\n✗ Looks like this sample might not be crypted with Ezuri. Please verify manualy (e.g. Yara rule).\n\n")
+		fmt.Printf("\n✗ Looks like this sample might not be crypted with Ezuri. Please verify manually (e.g. Yara rule).\n\n")
 		os.Exit(1)
 	}
 
