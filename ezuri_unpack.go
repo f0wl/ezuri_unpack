@@ -55,17 +55,28 @@ func main() {
 	f, openErr := os.Open(os.Args[1])
 	check(openErr)
 	defer f.Close()
-	readseeker := io.ReadSeeker(f)
-	// Pattern: .main.main.init
-	pattern := "2E6D61696E006D61696E2E696E6974"
 
+	readseeker := io.ReadSeeker(f)
 	packedData, readErr := ioutil.ReadAll(readseeker)
 	check(readErr)
 
 	fmt.Printf("\n→ Packed file SHA-256: %v\n", hex.EncodeToString(newSHA256(packedData)))
 
-	// search for the pattern
-	patternBytes, bytesErr := hex.DecodeString(pattern)
+	// search for the indicator pattern first to check if the sample is likely packed with Ezuri
+	indicatorPattern := "6D61696E2E72756E46726F6D4D656D6F7279"
+	indicatorBytes, byteErr := hex.DecodeString(indicatorPattern)
+	check(byteErr)
+	indicatorOffset, scanErr := scanFile(packedData, indicatorBytes)
+	check(scanErr)
+
+	if indicatorOffset == -1 {
+		fmt.Printf("\n✗ Looks like this sample might not be crypted with Ezuri. Please verify manualy (e.g. Yara rule).\n\n")
+		os.Exit(1)
+	}
+
+	// search for the pattern: .main.main.init
+	offsetPattern := "2E6D61696E006D61696E2E696E6974"
+	patternBytes, bytesErr := hex.DecodeString(offsetPattern)
 	check(bytesErr)
 	offset, scanErr := scanFile(packedData, patternBytes)
 	check(scanErr)
