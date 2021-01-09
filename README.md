@@ -6,15 +6,11 @@ A simple unpacking script for the Ezuri ELF Crypter. Based on the analysis done 
 
 ![ezuri_unpack.go screenshot](img/screenshot.png)
 
-<br>
-
 ## How does it work?
 
 The payload is encrypted with AES CFB and will be decrypted and run via memfd_create by the stub. Key and IV are stored in the binary.
 
 ![Hex Editor, POC executable](img/hex_key-iv.png)
-
-<br>
 
 ## Testing the script
 
