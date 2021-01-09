@@ -1,3 +1,5 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/f0wl/ezuri_unpack)](https://goreportcard.com/report/github.com/f0wl/ezuri_unpack)
+
 # ezuri_unpack
 
 A simple unpacking script for the Ezuri ELF Crypter. Based on the analysis done by Ofer Caspi and Fernando Martinez of AT&T Alien Labs: [https://cybersecurity.att.com/blogs/labs-research/malware-using-new-ezuri-memory-loader](https://cybersecurity.att.com/blogs/labs-research/malware-using-new-ezuri-memory-loader)
